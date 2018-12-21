@@ -2,8 +2,10 @@ package com.trabalho.compras.repository;
 
 import com.trabalho.compras.model.Item;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface ItemRepository extends CrudRepository<Item, Long> {
+@RepositoryRestResource(exported = false)
+public interface ItemRepository extends JpaRepository<Item, Long> {
 
 }

@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.trabalho.compras.model.Produto;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface ProdutoRepository extends CrudRepository<Produto, Long> {
+@RepositoryRestResource(exported = false)
+public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     List<Produto> findByNomeContaining(@Param("nome") String nome);
     

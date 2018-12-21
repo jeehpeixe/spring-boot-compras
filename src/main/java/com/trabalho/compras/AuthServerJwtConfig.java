@@ -33,8 +33,7 @@ public class AuthServerJwtConfig {
     @Bean
     public TokenEnhancer tokenEnhancer() {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(new JwtTokenEnhancer(),
-          accessTokenConverter()));
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(new JwtTokenEnhancer(),accessTokenConverter()));
         return tokenEnhancerChain;
     }    
 
