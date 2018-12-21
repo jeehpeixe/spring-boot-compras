@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "compras",
+                "projectName": "compras",
+                "workingDirectory": "/Users/jessicapeixe/Downloads/compras",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "compras",
+                "projectName": "compras",
+                "workingDirectory": "/Users/jessicapeixe/Downloads/compras",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
