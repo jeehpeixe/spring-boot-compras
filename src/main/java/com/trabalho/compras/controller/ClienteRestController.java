@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import com.trabalho.compras.model.Cliente;
+import com.trabalho.compras.model.Endereco;
 import com.trabalho.compras.repository.ClienteRepository;
 import com.trabalho.compras.resource.ClienteResource;
 import com.trabalho.compras.assembler.ClienteResourceAssembler;
@@ -34,11 +35,6 @@ public class ClienteRestController {
     ClienteRepository repository;
 
     ClienteResourceAssembler assembler = new ClienteResourceAssembler();
-
-    @PostConstruct
-	public void init() {
-		repository.save(new Cliente(1l,"Jessica","jessica@teste.com","643.568.122-50",null,1l));
-	}
     
     @Secured("ROLE_USER")
     @ApiOperation("Retorna a lista de clientes")
@@ -98,20 +94,20 @@ public class ClienteRestController {
     @ApiOperation("Busca os clientes pela rua do endereco")
     @GetMapping("/endereco/rua/{rua}")
     public ResponseEntity<List<ClienteResource>> findByRua(@PathVariable String rua) {
-        return new ResponseEntity<>(assembler.toResources(repository.findByRua(rua)), HttpStatus.OK);
+        return new ResponseEntity<>(assembler.toResources(repository.findByEndereco_Rua(rua)), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @ApiOperation("Busca os clientes pela cidade do endereco")
     @GetMapping("/endereco/cidade/{cidade}")
     public ResponseEntity<List<ClienteResource>> findByCidade(@PathVariable String cidade) {
-        return new ResponseEntity<>(assembler.toResources(repository.findByCidade(cidade)), HttpStatus.OK);
+        return new ResponseEntity<>(assembler.toResources(repository.findByEndereco_Cidade(cidade)), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @ApiOperation("Busca os clientes pelo estado do endereco")
     @GetMapping("/endereco/estado/{estado}")
     public ResponseEntity<List<ClienteResource>> findByEstado(@PathVariable String estado) {
-        return new ResponseEntity<>(assembler.toResources(repository.findByEstado(estado)), HttpStatus.OK);
+        return new ResponseEntity<>(assembler.toResources(repository.findByEndereco_Estado(estado)), HttpStatus.OK);
     }
 }

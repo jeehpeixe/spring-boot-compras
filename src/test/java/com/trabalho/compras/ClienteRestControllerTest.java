@@ -7,9 +7,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,10 +23,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.trabalho.compras.controller.ClienteRestController;
 import com.trabalho.compras.model.Cliente;
+import com.trabalho.compras.model.Endereco;
+import com.trabalho.compras.repository.ClienteRepository;
+import com.trabalho.compras.repository.EnderecoRepository;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = ComprasApplication.class)
 @WebMvcTest(ClienteRestController.class)
+@AutoConfigureMockMvc
 public class ClienteRestControllerTest {
 
 	@Autowired
@@ -31,7 +38,13 @@ public class ClienteRestControllerTest {
 	
 	@Autowired
 	ObjectMapper jsonParser;
-	
+
+	@Autowired
+	ClienteRepository repositorioCli;
+
+	@Autowired
+	EnderecoRepository repositorioEnd;
+
 	@Test
 	public void testGetAll() throws Exception {
 		mockMvc.perform(get("/clientesctrl"))
@@ -45,15 +58,20 @@ public class ClienteRestControllerTest {
 	@Test
 	public void testGet() throws Exception {
 		mockMvc.perform(get("/clientesctrl/{id}", 1))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(jsonPath("$.idCliente", equalTo(1)))
-				.andExpect(jsonPath("$.nome", equalTo("Jessica")));
+			   .andExpect(status().isOk())
+			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+			   .andExpect(jsonPath("$.idCliente", equalTo(1)))
+			   .andExpect(jsonPath("$.nome", equalTo("Jessica")));
 	}
 
 	@Test
 	public void testCreate() throws Exception {
-		Cliente cliente = new Cliente(2l,"Lucas","lucas@teste.com","765.098.287-11",null,1l);
+
+		Endereco endereco = new Endereco();
+		endereco.setIdEndereco(1l);
+
+		Cliente cliente = new Cliente(2l, "Lucas", "lucas@teste.com", "765.098.287-11", new Date(), endereco);
+
 		mockMvc.perform(post("/clientesctrl").contentType(MediaType.APPLICATION_JSON_UTF8)
 				.content(jsonParser.writeValueAsString(cliente)))
 				.andExpect(status().isOk())

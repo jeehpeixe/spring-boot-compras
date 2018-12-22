@@ -1,8 +1,12 @@
 package com.trabalho.compras.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Table(name = "enderecos")
 public class Endereco {
 
     @Id @GeneratedValue
@@ -25,6 +30,6 @@ public class Endereco {
     String rua;
     String cidade;
     String estado;
-    Integer cep;
+    String cep;
 
 }

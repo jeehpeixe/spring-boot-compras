@@ -3,6 +3,8 @@ package com.trabalho.compras.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Table(name = "itens")
 public class Item {
 
     @Id @GeneratedValue
@@ -25,7 +28,8 @@ public class Item {
     
     Integer quantidade;
     Double total;
-    Long idProduto;
-    Long idPedido;
+
+    @ManyToOne
+    Produto produto;
 
 }

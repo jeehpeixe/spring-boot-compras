@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Table(name = "clientes")
 public class Cliente {
 
 @Id @GeneratedValue
@@ -32,6 +35,7 @@ public class Cliente {
     @Temporal(javax.persistence.TemporalType.DATE)
     Date dataNascimento;
 
-    Long idEndereco;
+    @ManyToOne
+	Endereco endereco;
 
 }
